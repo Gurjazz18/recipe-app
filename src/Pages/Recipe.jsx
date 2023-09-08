@@ -52,6 +52,8 @@ const Recipe = () => {
       {
          data.map((elem,i)=>(
 
+            
+           
           
           <div className="cards_item" key={i+1}>
                   <div className="card">
@@ -65,10 +67,19 @@ const Recipe = () => {
                       </div>
                       <div className="card_content">
                           <h4 className="card_title">{elem.recipe.label}</h4>
-                          <p>{elem.recipe.digest.length}</p>
+                        
+
+                          <h5>Protein :
+                          {elem.recipe.totalNutrients.PROCNT.quantity.toFixed(0)}
+                          {elem.recipe.totalNutrients.PROCNT.unit}</h5>
+                          <h5>FAT :{elem.recipe.totalNutrients.FAT.quantity.toFixed(0)}
+                          {elem.recipe.totalNutrients.PROCNT.unit}</h5>
+
+                          
 
                           <button onClick={handlebtn} className='btn'>
-                          Order Now</button>
+                              Order Now
+                            </button>
                           
                          
                           
@@ -89,7 +100,7 @@ const Recipe = () => {
 
 
  
- </>
+     </>
   )
 }
 

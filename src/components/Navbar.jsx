@@ -1,11 +1,24 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { getAuth, signOut } from "firebase/auth";
 
 function Navbar() {
+  const usenavigate=useNavigate()
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
+
+  const handlelogout=()=>{
+
+    const auth = getAuth();
+      signOut(auth).then(() => {
+        usenavigate("/")
+      }).catch((error) => {
+        // An error happened.
+      });
+
+  }
 
   return (
     <>
@@ -20,7 +33,7 @@ function Navbar() {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <NavLink
-                exact
+             
                 to="/recipe"
                 activeClassName="active"
                 className="nav-links"
@@ -29,9 +42,25 @@ function Navbar() {
                 Recipe
               </NavLink>
             </li>
+
+           
+
             <li className="nav-item">
               <NavLink
-                exact
+              
+                to="/calorie"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+               Calorie
+              </NavLink>
+            </li>
+
+            
+            <li className="nav-item">
+              <NavLink
+            
                 to="/diet"
                 activeClassName="active"
                 className="nav-links"
@@ -41,16 +70,18 @@ function Navbar() {
               </NavLink>
             </li>
 
-
             <li className="nav-item">
               <NavLink
-                exact
-                to="/calorie"
+            
+         
                 activeClassName="active"
                 className="nav-links"
-                onClick={handleClick}
+                onClick={handlelogout}
+           
+               
+               
               >
-               Calorie
+               Logout
               </NavLink>
             </li>
 
